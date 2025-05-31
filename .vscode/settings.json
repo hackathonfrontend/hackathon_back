@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "driver": "PostgreSQL",
+      "username": "postgres.vbovzftczepcfdxnrzae",
+      "password": "IYxl1iu4r9J7vlJT",
+      "connectString": "jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require&pgbouncer=true&prepareThreshold=0",
+      "name": "Hackaton"
+    }
+  ]
+}

@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 from typing import Optional
 from app.schemas.member_schema import MemberCreate, MemberRead, MemberUpdate
 from app.services.member_service import MemberService
-from config.dependencies import get_db, get_member_service
+from app.services.manga_room_service import MangaRoomService # Add this import
+from config.dependencies import get_member_service, get_manga_room_service # Add get_manga_room_service
 
 router = APIRouter(
     prefix="/members",
@@ -13,8 +14,16 @@ router = APIRouter(
 @router.post("/", response_model=MemberRead, status_code=status.HTTP_201_CREATED)
 def create_member(
     member_create: MemberCreate,
-    member_service: MemberService = Depends(get_member_service)
+    member_service: MemberService = Depends(get_member_service),
+    manga_room_service: MangaRoomService = Depends(get_manga_room_service) # Inject MangaRoomService
 ):
+    # Check if the manga_room_id exists
+    db_manga_room = manga_room_service.get_manga_room_by_room_id(room_id=member_create.manga_room_id)
+    if db_manga_room is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"MangaRoom with room_id '{member_create.manga_room_id}' not found. Cannot create member."
+        )
     return member_service.create_member(member_create=member_create)
 
 @router.get("/{member_id}", response_model=MemberRead)

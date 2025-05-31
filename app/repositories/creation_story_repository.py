@@ -17,11 +17,10 @@ class CreationStoryRepository:
     def get_by_id(self, story_id: int) -> CreationStory | None:
         return self.db.query(CreationStory).filter(CreationStory.id == story_id).first()
 
-    def get_all(self, manga_room_id: Optional[int] = None) -> list[CreationStory]:
+    def get_all(self, manga_id: Optional[int] = None) -> list[CreationStory]: # Changed from Optional[str]
         query = self.db.query(CreationStory)
-        if manga_room_id is not None:
-            # Assuming your CreationStory model has a 'manga_room_id' field
-            query = query.filter(CreationStory.manga_room_id == manga_room_id)
+        if manga_id is not None:
+            query = query.filter(CreationStory.manga_id == manga_id)
         return query.all()
 
     def update(self, story_id: int, creation_story_update: CreationStoryUpdate) -> CreationStory | None:
