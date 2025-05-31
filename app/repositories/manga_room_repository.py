@@ -14,6 +14,9 @@ class MangaRoomRepository:
         self.db.refresh(db_manga_room)
         return db_manga_room
 
+    def get_by_primary_id(self, id: int) -> MangaRoom | None: # New method to get by primary key 'id'
+        return self.db.query(MangaRoom).filter(MangaRoom.id == id).first()
+
     def get_by_room_id(self, room_id: int) -> MangaRoom | None: # Renamed and changed param type
         return self.db.query(MangaRoom).filter(MangaRoom.room_id == room_id).first()
 
