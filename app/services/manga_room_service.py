@@ -3,6 +3,7 @@ from app.models.manga_room_model import MangaRoom
 from app.schemas.manga_room_schema import MangaRoomCreate, MangaRoomUpdate
 from app.repositories.manga_room_repository import MangaRoomRepository
 from typing import Optional
+from app.models.member_model import Member
 
 class MangaRoomService:
     def __init__(self, manga_room_repository: MangaRoomRepository):
@@ -22,3 +23,13 @@ class MangaRoomService:
 
     def delete_manga_room_by_room_id(self, room_id: int) -> MangaRoom | None: # Renamed and changed param type
         return self.manga_room_repository.delete_by_room_id(room_id=room_id)
+
+    def get_members(self, manga_room_id: int) -> list[Member]:
+        return self.db_session.query(Member).filter(Member.manga_room_id == manga_room_id).all()
+
+    # Python
+    def get_manga_room_id(self, user_id: int) -> int:
+        manga_room = self.manga_room_repository.get_by_user_id(user_id=user_id)
+        if not manga_room:
+            raise ValueError("Manga room not found for the given user.")
+        return manga_room.id
