@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, String
 from config.base import Base
 from sqlalchemy.orm import relationship
-from .manga_room import MangaRoom
+from .manga_room_model import MangaRoom
 
 class User(Base):
     __tablename__ = "users"
