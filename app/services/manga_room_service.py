@@ -11,6 +11,9 @@ class MangaRoomService:
     def create_manga_room(self, manga_room_create: MangaRoomCreate) -> MangaRoom:
         return self.manga_room_repository.create(manga_room_create=manga_room_create)
 
+    def get_manga_room_by_id(self, id: int) -> MangaRoom | None: # New method to get by primary key 'id'
+        return self.manga_room_repository.get_by_primary_id(id=id)
+
     def get_manga_room_by_room_id(self, room_id: int) -> MangaRoom | None: # Renamed and changed param type
         return self.manga_room_repository.get_by_room_id(room_id=room_id)
 

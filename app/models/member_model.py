@@ -4,7 +4,7 @@ from config.database import Base
 class Member(Base):
     __tablename__ = "members"
 
-    user_id = Column(Integer, primary_key=True, index=True)  # Make user_id the primary key
-    manga_room_id = Column(Integer, nullable=False)
-    # user = relationship("User", back_populates="memberships")
-    # manga_room = relationship("MangaRoom", back_populates="members", foreign_keys=[manga_room_id])
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True, index=True, nullable=False)
+    manga_room_id = Column(Integer, ForeignKey("manga_rooms.id"), primary_key=True, nullable=False) # Changed FK to manga_rooms.id
+    # user = relationship("User", back_poulates="memberships")
+    # manga_room = relationship("MangaRopom", back_populates="members", foreign_keys=[manga_room_id])
