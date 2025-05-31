@@ -1,7 +1,4 @@
-<<<<<<<< HEAD:app/routers/user_router.py
 
-========
->>>>>>>> main:app/routers/user_routers.py
 from app.services.user_service import UserService
 from app.schemas.user_schema import UserCreate
 from fastapi import APIRouter, Depends
