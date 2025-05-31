@@ -7,5 +7,5 @@ from config.database import get_db  # assumes you have a get_db dependency
 def get_user_service(db=Depends(get_db)):
     return UserService(UserRepository(db))
 
-get_user_service = Depends(get_user_service)
+user_service_dependency = get_user_service
 Base = declarative_base()
