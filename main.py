@@ -1,13 +1,14 @@
 from fastapi import FastAPI
+# from database import create_tables
+
+from fastapi.testclient import TestClient
 
 app = FastAPI()
 
+client = TestClient(app)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+def test_on_startup(capsys):
+    with client:
+        pass  # Startup event is triggered here
+    captured = capsys.readouterr()
+    assert "hi" in captured.out
