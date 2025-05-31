@@ -17,5 +17,6 @@ class PromptUpdate(BaseModel):
 class PromptRead(PromptBase):
     id: int
 
+
     class Config:
         orm_mode = True
