@@ -15,4 +15,4 @@ class MemberUpdate(BaseModel):
 class MemberRead(MemberBase): # user_id and manga_room_id are inherited from MemberBase
     # No separate 'id' field if the primary key is composite (user_id, manga_room_id)
     class Config:
-        orm_mode = True
+        from_attributes = True # Changed from orm_mode

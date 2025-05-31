@@ -9,7 +9,7 @@ class UserRead(BaseModel):
     username: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True # Changed from orm_mode
 
 
 class UserLogin(BaseModel):

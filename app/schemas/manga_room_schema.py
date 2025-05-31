@@ -16,10 +16,10 @@ class MangaRoomUpdate(BaseModel): # Changed to BaseModel for explicit optional f
 
 class MangaRoomRead(MangaRoomBase):
     id: int
-    room_id: int  # Changed to int
+    room_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True # Changed from orm_mode
 
 class MangaRoomStringIdResponse(BaseModel):
     room_id: int  # Changed to int

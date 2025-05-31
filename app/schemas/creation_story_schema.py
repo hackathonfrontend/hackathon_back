@@ -19,9 +19,7 @@ class CreationStoryUpdate(BaseModel):
     # manga_id is typically not updated for an existing story, but can be added if needed.
 
 class CreationStoryRead(CreationStoryBase):
-    id: int # Assuming CreationStory.id remains int
-    # created_at: datetime # Add if these fields exist in your model and you want them in read schema
-    # updated_at: Optional[datetime] = None
+    id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True # Changed from orm_mode

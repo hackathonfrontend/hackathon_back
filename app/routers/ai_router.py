@@ -1,17 +1,28 @@
-from fastapi import APIRouter, HTTPException,Depends
+from fastapi import APIRouter, HTTPException, Depends
 from app.services.ai_service import send_prompt  # Import your AI service function
 from app.models.prompt_model import Prompt  # Import the PromptModel
 from app.services.manga_room_service import MangaRoomService  # Service to fetch manga room members
 from pydantic import BaseModel
-router = APIRouter(prefix="/ai", tags=["ai"])
+from app.schemas.creation_story_schema import CreationStoryRead, CreationStoryCreate 
+from app.services.creation_story_service import CreationStoryService # Assuming you have this
+from config.dependencies import get_creation_story_service, get_manga_room_service # Adjust as needed
+
+router = APIRouter(
+    prefix="/ai",  # Or whatever prefix you use for ai_router
+    tags=["ai"]
+)
 
 class PromptRequest(BaseModel):
     prompt: str
     people: int
 
 
-@router.post("/create-story")
-def send_prompt_to_ai(prompt_data: PromptRequest, manga_room_service: MangaRoomService = Depends()):
+@router.post("/create-story", response_model=CreationStoryRead) # Ensure response_model is a Pydantic schema
+async def create_story_endpoint(
+    story_data: CreationStoryCreate, # Assuming this is your input schema
+    # Inject necessary services
+    creation_story_service: CreationStoryService = Depends(get_creation_story_service)
+):
     try:
         people = prompt_data.people
         base_prompt = prompt_data.prompt.strip()
