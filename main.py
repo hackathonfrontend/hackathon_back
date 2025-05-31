@@ -2,12 +2,16 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from config.database import create_tables
 from app.routers import user_router # Or your specific router module
+
+from app.routers import ai_router
+
 from app.routers import manga_room_router # Add this import
 from app.routers import creation_story_router
 from app.routers import member_router
 from app.routers import notification_router
 from app.routers import prompt_router
 from fastapi.middleware.cors import CORSMiddleware
+
 
 
 @asynccontextmanager
@@ -27,6 +31,9 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 app.include_router(user_router.router)
+
+app.include_router(ai_router.router)
+
 app.include_router(manga_room_router.router) # Add this line
 app.include_router(creation_story_router.router)
 app.include_router(member_router.router)

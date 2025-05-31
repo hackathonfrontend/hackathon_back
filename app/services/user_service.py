@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.user_model import User # Changed back if it was app.models.user
 from app.repositories.user_repository import UserRepository
+
 from app.models.user_model import User
 class UserService:
     def __init__(self, user_repository: UserRepository):
