@@ -35,7 +35,11 @@ def login(user_login: UserLogin, user_service: UserService = Depends(user_servic
     if not user or not verify_password(user_login.password, user.password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     access_token = create_access_token(data={"sub": user.username, "user_id": user.id})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user_id": user.id
+    }
 
 @router.delete("/{user_id}", status_code=204)
 def delete_user(user_id: int, user_service: UserService = Depends(user_service_dependency)):
