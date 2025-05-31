@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.user_model import User
+from app.models.user_model import User  # Changed back if it was app.models.user
 
 class UserRepository:
     def __init__(self, db: Session):
@@ -14,3 +14,14 @@ class UserRepository:
         self.db.commit()
         self.db.refresh(user)
         return user
+
+    def get_by_username(self, username: str) -> User | None:
+        return self.db.query(User).filter(User.username == username).first()
+    def delete(self, user_id: int):
+        user = self.db.query(User).filter(User.id == user_id).first()
+        if user:
+            self.db.delete(user)
+            self.db.commit()
+
+    def get_by_id(self, user_id: int) -> User | None:
+        return self.db.query(User).filter(User.id == user_id).first()
