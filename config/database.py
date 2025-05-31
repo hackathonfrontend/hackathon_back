@@ -1,7 +1,7 @@
 # database.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
+from config.base import Base
 
 
 SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://postgres.vbovzftczepcfdxnrzae:IYxl1iu4r9J7vlJT@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require"
