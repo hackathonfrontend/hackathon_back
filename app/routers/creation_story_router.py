@@ -29,10 +29,10 @@ def get_creation_story(
 
 @router.get("/", response_model=list[CreationStoryRead])
 def get_all_creation_stories(
-    manga_room_id: Optional[int] = None,
+    manga_id: Optional[int] = None,  # Changed from Optional[str]
     creation_story_service: CreationStoryService = Depends(get_creation_story_service)
 ):
-    return creation_story_service.get_all_creation_stories(manga_room_id=manga_room_id)
+    return creation_story_service.get_all_creation_stories(manga_id=manga_id)
 
 @router.put("/{story_id}", response_model=CreationStoryRead)
 def update_creation_story(

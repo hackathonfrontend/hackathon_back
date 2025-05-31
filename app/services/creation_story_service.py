@@ -14,8 +14,8 @@ class CreationStoryService:
     def get_creation_story_by_id(self, story_id: int) -> CreationStory | None:
         return self.creation_story_repository.get_by_id(story_id=story_id)
 
-    def get_all_creation_stories(self, manga_room_id: Optional[int] = None) -> list[CreationStory]:
-        return self.creation_story_repository.get_all(manga_room_id=manga_room_id)
+    def get_all_creation_stories(self, manga_id: Optional[int] = None) -> list[CreationStory]: # Changed from Optional[str]
+        return self.creation_story_repository.get_all(manga_id=manga_id)
 
     def update_creation_story(self, story_id: int, creation_story_update: CreationStoryUpdate) -> CreationStory | None:
         return self.creation_story_repository.update(story_id=story_id, creation_story_update=creation_story_update)
