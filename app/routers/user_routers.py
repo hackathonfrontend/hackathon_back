@@ -1,4 +1,3 @@
-# app/controllers/user_controller.py
 from app.services.user_service import UserService
 from app.schemas.user_schema import UserCreate
 from fastapi import APIRouter, Depends
